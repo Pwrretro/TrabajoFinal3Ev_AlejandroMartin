@@ -1,0 +1,47 @@
+@startuml
+class Juego {
+  - tablero: Tablero
+  - turnoBlanco: boolean
+  + Juego()
+  + jugar()
+  + main(String[] args)
+}
+
+class Tablero {
+  - tablero: Pieza[][]
+  + Tablero()
+  + obtenerPieza(x: int, y: int): Pieza
+  + colocarPieza(x: int, y: int, pieza: Pieza): void
+  + prepararTablero(): void
+  + moverPieza(inicioX: int, inicioY: int, finX: int, finY: int): boolean
+  + mostrarTablero(): void
+  + contarBlancasComidas(): void
+  + contarNegrasComidas(): void
+  + Victoria(): boolean
+  + hayVictoriaBlancas(): boolean
+  + hayVictoriaNegras(): boolean
+}
+
+abstract class Pieza {
+  - esBlanco: boolean
+  - simbolo: String
+  + Pieza(esBlanco: boolean, simbolo: String)
+  + esMovimientoValido(tablero: Tablero, inicioX: int, inicioY: int, finX: int, finY: int): boolean
+  + esBlanco(): boolean
+  + obtenerSimbolo(): String
+  + capturarPieza(piezaCapturada: Pieza): void
+  - comida: boolean
+  + estaComida(): boolean
+  + setComida(comida: boolean): void
+}
+
+Juego "1" --> "1" Tablero
+Tablero "1" --> "8x8" Pieza : contiene
+Pieza <|-- Peon
+Pieza <|-- Torre
+Pieza <|-- Caballo
+Pieza <|-- Alfil
+Pieza <|-- Reina
+Pieza <|-- Rey
+
+@enduml
